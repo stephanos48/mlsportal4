@@ -1,0 +1,53 @@
+<div class="container mt-5">
+    <div *ngIf="!createMode">
+      <h2>USA QOH</h2>
+      <a class="nav-link" [routerLink]="['/landing']"><h2><i class="fa fa-arrow-left"></i></h2></a>
+      <div style="text-align: left">
+          <button class="btn btn-primary btn-md" (click)="createToggle()">Create</button>
+      </div>
+      <br>
+      <div class="row" style="text-align: left"> 
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 5%"></th>
+              <th style="width: 5%">Id</th>         
+              <th style="width: 15%">Pn</th>
+              <th style="width: 15%">Extreme Pn</th>
+              <th style="width: 10%">Qoh</th>
+              <th style="width: 5%"></th>
+              <th style="width: 10%">Jan1Qoh</th>
+              <th style="width: 10%">Jan1Rec</th>
+              <th style="width: 10%">Jan1Ship</th>
+              <th style="width: 5%">Location</th>
+              <th style="width: 10%">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let txqoh of txqohactuals">
+              <td><button class="btn btn-info" (click)="editTxQohsModal(txqoh)">Edit</button></td>
+              <td>{{txqoh.txQohId}}</td>          
+              <td>{{txqoh.pn}}</td>
+              <td>{{txqoh.extremePn}}</td>
+              <td>{{txqoh.qoh}}</td>
+              <td></td>
+              <td>{{txqoh.jan1Qoh}}</td>
+              <td>{{txqoh.jan1Rec}}</td>
+              <td>{{txqoh.jan1Ship}}</td>
+              <td>{{txqoh.location}}</td>
+              <td>{{txqoh.notes}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div *ngIf="createMode" class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <app-txqoh-create (cancelCreate)="cancelCreateMode($event)"></app-txqoh-create>
+        </div>
+      </div>
+    </div>
+  </div>
+

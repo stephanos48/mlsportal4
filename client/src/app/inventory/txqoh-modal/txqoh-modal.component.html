@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Qoh: {{txqoh?.pn}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #txQohForm="ngForm" id="txQohForm">
+        <div class="form-group">
+            <input type="text" class="form-control" required name="pn" [(ngModel)]="txqoh.pn" placeholder="Pn">
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" name="extremePn" [(ngModel)]="txqoh.extremePn" placeholder="extremePn">
+        </div>
+    
+        <div class="form-group">
+            <input type="text" class="form-control" required name="partDescription" [(ngModel)]="txqoh.partDescription" placeholder="PartDescription">
+        </div>
+            
+        <div class="form-group">
+            <input type="text" class="form-control" required name="qoh" [(ngModel)]="txqoh.qoh" placeholder="Qoh">
+        </div>
+    
+        <div class="form-group">
+            <input type="text" class="form-control" required name="location" [(ngModel)]="txqoh.location" placeholder="Location">
+        </div>
+    
+        <div class="form-group">
+            <input type="text" class="form-control" required name="notes" [(ngModel)]="txqoh.notes" placeholder="Notes">
+        </div>
+  
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="updateTxQoh()" form="txQohForm">Submit</button>
+  </div>

@@ -34,6 +34,12 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { LandingComponent } from './landing/landing.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { TxqohComponent } from './inventory/txqoh/txqoh.component';
+import { TxqohCreateComponent } from './inventory/txqoh-create/txqoh-create.component';
+import { TxqohEditComponent } from './inventory/txqoh-edit/txqoh-edit.component';
+import { TxqohModalComponent } from './inventory/txqoh-modal/txqoh-modal.component';
+import { TxqohactualsComponent } from './inventory/txqohactuals/txqohactuals.component';
 
 
 @NgModule({
@@ -61,7 +67,13 @@ import { LandingComponent } from './landing/landing.component';
     HasRoleDirective,
     RolesModalComponent,
     ConfirmDialogComponent,
-    LandingComponent
+    LandingComponent,
+    InventoryComponent,
+    TxqohComponent,
+    TxqohCreateComponent,
+    TxqohEditComponent,
+    TxqohModalComponent,
+    TxqohactualsComponent
   ],
   imports: [
     BrowserModule,

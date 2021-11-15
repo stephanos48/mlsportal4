@@ -15,6 +15,12 @@ import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { LandingComponent } from './landing/landing.component';
+import { TxqohComponent } from './inventory/txqoh/txqoh.component';
+import { TxqohCreateComponent } from './inventory/txqoh-create/txqoh-create.component';
+import { TxqohModalComponent } from './inventory/txqoh-modal/txqoh-modal.component';
+import { TxqohactualsComponent } from './inventory/txqohactuals/txqohactuals.component';
+import { InventoryComponent } from './inventory/inventory.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -30,6 +36,11 @@ const routes: Routes = [
       {path: 'messages', component: MessagesComponent},
       {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
       {path: 'landing', component: LandingComponent},
+      {path: 'inventory', component: InventoryComponent},
+      {path: 'txqoh', component: TxqohComponent},
+      {path: 'txqohactuals', component: TxqohactualsComponent},
+      {path: 'txqoh-modal', component: TxqohModalComponent},      
+      {path: 'txqoh-create', component: TxqohCreateComponent}
     ]
   },
   {path: 'errors', component: TestErrorsComponent },
