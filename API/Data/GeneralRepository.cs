@@ -40,21 +40,21 @@ namespace API.Data.Migrations
 
         //TxQoh Methods
 
-        public async Task<IEnumerable<TxQoh>> GetTxQohsAsync()
+        public async Task<IEnumerable<MasterPart>> GetMasterPartAsync()
         {
-            var txqohs = await _context.TxQohs.ToListAsync();
+            var txqohs = await _context.MasterParts.ToListAsync();
             return txqohs;
         }
 
-        public async Task<TxQoh> GetTxQoh(int id)
+        public async Task<MasterPart> GetMasterPart(int id)
         {
-            var specificpn = await _context.TxQohs.FirstOrDefaultAsync(m => m.TxQohId == id);
+            var specificpn = await _context.MasterParts.FirstOrDefaultAsync(m => m.MasterPartId == id);
             return specificpn;
         }
 
-        public void DeleteTxQoh(TxQoh txQoh)
+        public void DeleteMasterPart(MasterPart masterPart)
         {
-            _context.TxQohs.Remove(txQoh);
+            _context.MasterParts.Remove(masterPart);
         }
 
         //PoPlan Methods

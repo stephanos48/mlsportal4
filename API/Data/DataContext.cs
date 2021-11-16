@@ -24,7 +24,17 @@ namespace API.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<TxQoh> TxQohs { get; set; }
+        public DbSet<MasterPart> MasterParts { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerDivision> CustomerDivisions { get; set; }
+        public DbSet<MlsDivision> MlsDivisions { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<PartType> PartTypes { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderLine> PurchaseOrderLines { get; set; }
+        public DbSet<ShipMode> ShipModes { get; set; }
+        public DbSet<Container> Containers { get; set; }
+        public DbSet<ContainerDetail> ContainerDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -70,6 +80,7 @@ namespace API.Data
             builder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);  
 
             builder.ApplyUtcDateTimeConverter(); 
+
         }
     }
 

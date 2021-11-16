@@ -176,6 +176,146 @@ namespace API.Data.Migrations
                     b.ToTable("Connections");
                 });
 
+            modelBuilder.Entity("API.Entities.Container", b =>
+                {
+                    b.Property<int>("ContainerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("AMS")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ArrivalDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ArrivalPort")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BOL")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContainerNoFF")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContainerNoInt")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ContainerStatusId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ContainerStatusName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DepartureDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DeparturePort")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Destination")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("EtaDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("EtdDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("EtpDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("FreightForwarder")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Invoice")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("PortDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("ShipModeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ShipModeName")
+                        .HasColumnType("text");
+
+                    b.HasKey("ContainerId");
+
+                    b.ToTable("Containers");
+                });
+
+            modelBuilder.Entity("API.Entities.ContainerDetail", b =>
+                {
+                    b.Property<int>("ContainerDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int>("ContainerId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ContainerPalletNo")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ContainerQty")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MasterPartId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("text");
+
+                    b.HasKey("ContainerDetailId");
+
+                    b.HasIndex("ContainerId");
+
+                    b.ToTable("ContainerDetails");
+                });
+
+            modelBuilder.Entity("API.Entities.Customer", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.HasKey("CustomerId");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("API.Entities.CustomerDivision", b =>
+                {
+                    b.Property<int>("CustomerDivisionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("CustomerDivisionName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.HasKey("CustomerDivisionId");
+
+                    b.ToTable("CustomerDivisions");
+                });
+
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Property<string>("Name")
@@ -184,6 +324,87 @@ namespace API.Data.Migrations
                     b.HasKey("Name");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("API.Entities.Location", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("LocationName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("API.Entities.MasterPart", b =>
+                {
+                    b.Property<int>("MasterPartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CustomerDivisionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CustomerDivisionName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("HtsCode")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("MlsDivisionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("MlsDivisionName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MlsPn")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PartDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PartTypeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PartTypeName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Qoh")
+                        .HasColumnType("integer");
+
+                    b.HasKey("MasterPartId");
+
+                    b.ToTable("MasterParts");
                 });
 
             modelBuilder.Entity("API.Entities.Message", b =>
@@ -229,6 +450,39 @@ namespace API.Data.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("API.Entities.MlsDivision", b =>
+                {
+                    b.Property<int>("MlsDivisionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("MlsDivisionName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.HasKey("MlsDivisionId");
+
+                    b.ToTable("MlsDivisions");
+                });
+
+            modelBuilder.Entity("API.Entities.PartType", b =>
+                {
+                    b.Property<int>("PartTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("PartTypeName")
+                        .HasColumnType("text");
+
+                    b.HasKey("PartTypeId");
+
+                    b.ToTable("PartTypes");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -245,6 +499,9 @@ namespace API.Data.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("boolean");
 
+                    b.Property<int?>("MasterPartId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PublicId")
                         .HasColumnType("text");
 
@@ -255,43 +512,135 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
+                    b.HasIndex("MasterPartId");
+
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("API.Entities.TxQoh", b =>
+            modelBuilder.Entity("API.Entities.PurchaseOrder", b =>
                 {
-                    b.Property<int>("TxQohId")
+                    b.Property<int>("PurchaseOrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<string>("Customer")
+                    b.Property<int>("CustomerDivisionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CustomerDivisionName")
                         .HasColumnType("text");
 
-                    b.Property<string>("ExtremePn")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CustomerName")
                         .HasColumnType("text");
 
-                    b.Property<string>("HtsCode")
-                        .HasColumnType("text");
+                    b.Property<int>("MlsDivisionId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("MlsDivisionName")
                         .HasColumnType("text");
 
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
-                    b.Property<string>("PartDescription")
-                        .HasColumnType("text");
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Pn")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Qoh")
+                    b.Property<int>("PoStatusId")
                         .HasColumnType("integer");
 
-                    b.HasKey("TxQohId");
+                    b.Property<string>("PoStatusName")
+                        .HasColumnType("text");
 
-                    b.ToTable("TxQohs");
+                    b.Property<string>("PurchaseOrderNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("SalesOrderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SalesOrderNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SupplierName")
+                        .HasColumnType("text");
+
+                    b.HasKey("PurchaseOrderId");
+
+                    b.ToTable("PurchaseOrders");
+                });
+
+            modelBuilder.Entity("API.Entities.PurchaseOrderLine", b =>
+                {
+                    b.Property<int>("PurchaseOrderLineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int>("ContainerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MasterPartId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<int>("OrderQty")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("PromiseDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("PurchaseOrderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PurchaseOrderLineNo")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ReceivedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("RequestDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("PurchaseOrderLineId");
+
+                    b.HasIndex("ContainerId");
+
+                    b.HasIndex("PurchaseOrderId");
+
+                    b.ToTable("PurchaseOrderLines");
+                });
+
+            modelBuilder.Entity("API.Entities.ShipMode", b =>
+                {
+                    b.Property<int>("ShipModeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int?>("ContainerId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShipModeName")
+                        .HasColumnType("text");
+
+                    b.HasKey("ShipModeId");
+
+                    b.HasIndex("ContainerId");
+
+                    b.ToTable("ShipModes");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -307,6 +656,36 @@ namespace API.Data.Migrations
                     b.HasIndex("LikedUserId");
 
                     b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("ContainerDetailPurchaseOrderLine", b =>
+                {
+                    b.Property<int>("ContainerDetailsContainerDetailId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PurchaseOrderLinesPurchaseOrderLineId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ContainerDetailsContainerDetailId", "PurchaseOrderLinesPurchaseOrderLineId");
+
+                    b.HasIndex("PurchaseOrderLinesPurchaseOrderLineId");
+
+                    b.ToTable("ContainerDetailPurchaseOrderLine");
+                });
+
+            modelBuilder.Entity("LocationMasterPart", b =>
+                {
+                    b.Property<int>("LocationsLocationId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MasterPartsMasterPartId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("LocationsLocationId", "MasterPartsMasterPartId");
+
+                    b.HasIndex("MasterPartsMasterPartId");
+
+                    b.ToTable("LocationMasterPart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -421,6 +800,15 @@ namespace API.Data.Migrations
                         .HasForeignKey("GroupName");
                 });
 
+            modelBuilder.Entity("API.Entities.ContainerDetail", b =>
+                {
+                    b.HasOne("API.Entities.Container", null)
+                        .WithMany("ContainerDetails")
+                        .HasForeignKey("ContainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("API.Entities.Message", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "Recipient")
@@ -448,7 +836,37 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Entities.MasterPart", null)
+                        .WithMany("Photos")
+                        .HasForeignKey("MasterPartId");
+
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.PurchaseOrderLine", b =>
+                {
+                    b.HasOne("API.Entities.Container", "Containers")
+                        .WithMany()
+                        .HasForeignKey("ContainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.PurchaseOrder", "PurchaseOrder")
+                        .WithMany("PurchaseOrderLines")
+                        .HasForeignKey("PurchaseOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Containers");
+
+                    b.Navigation("PurchaseOrder");
+                });
+
+            modelBuilder.Entity("API.Entities.ShipMode", b =>
+                {
+                    b.HasOne("API.Entities.Container", null)
+                        .WithMany("ShipModes")
+                        .HasForeignKey("ContainerId");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -468,6 +886,36 @@ namespace API.Data.Migrations
                     b.Navigation("LikedUser");
 
                     b.Navigation("SourceUser");
+                });
+
+            modelBuilder.Entity("ContainerDetailPurchaseOrderLine", b =>
+                {
+                    b.HasOne("API.Entities.ContainerDetail", null)
+                        .WithMany()
+                        .HasForeignKey("ContainerDetailsContainerDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.PurchaseOrderLine", null)
+                        .WithMany()
+                        .HasForeignKey("PurchaseOrderLinesPurchaseOrderLineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LocationMasterPart", b =>
+                {
+                    b.HasOne("API.Entities.Location", null)
+                        .WithMany()
+                        .HasForeignKey("LocationsLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.MasterPart", null)
+                        .WithMany()
+                        .HasForeignKey("MasterPartsMasterPartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -526,9 +974,26 @@ namespace API.Data.Migrations
                     b.Navigation("UserRoles");
                 });
 
+            modelBuilder.Entity("API.Entities.Container", b =>
+                {
+                    b.Navigation("ContainerDetails");
+
+                    b.Navigation("ShipModes");
+                });
+
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Navigation("Connections");
+                });
+
+            modelBuilder.Entity("API.Entities.MasterPart", b =>
+                {
+                    b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("API.Entities.PurchaseOrder", b =>
+                {
+                    b.Navigation("PurchaseOrderLines");
                 });
 #pragma warning restore 612, 618
         }

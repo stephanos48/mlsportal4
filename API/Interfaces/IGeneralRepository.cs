@@ -15,9 +15,9 @@ namespace API.Interfaces
         Task<bool> SaveChangesAsync();
 
         //TxQoh Methods
-        Task<IEnumerable<TxQoh>> GetTxQohsAsync();
-        Task<TxQoh> GetTxQoh(int id);
-        void DeleteTxQoh(TxQoh txQoh);
+        Task<IEnumerable<MasterPart>> GetMPsAsync();
+        Task<MasterPart> GetMasterPart(int id);
+        void DeleteMasterPart(MasterPart masterPart);
 
         //PoPlan Methods
        /* Task<IEnumerable<PoPlan>> GetPoPlansAsync();
