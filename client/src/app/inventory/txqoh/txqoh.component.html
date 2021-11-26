@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div *ngIf="!createMode">
       <h2>USA QOH</h2>
-      <a class="nav-link" [routerLink]="['/landing']"><h2><i class="fa fa-arrow-left"></i></h2></a>
+      <a class="nav-link" [routerLink]="['/inventory']"><h2><i class="fa fa-arrow-left"></i></h2></a>
       <div style="text-align: left">
           <button class="btn btn-primary btn-md" (click)="createToggle()">Create</button>
       </div>
@@ -14,26 +14,28 @@
               <th style="width: 5%"></th>           
               <th style="width: 5%">Id</th> 
               <th style="width: 10%">Pn</th>
-              <th style="width: 10%">Extreme Pn</th>
-              <th style="width: 20%">Part Description</th>
+              <th style="width: 10%">MlsPn</th>
+              <th style="width: 20%">PartDescription</th>
               <th style="width: 5%">StartQoh</th>
               <th style="width: 10%">Location</th>
-              <th style="width: 15%">HTS Code</th>
+              <th style="width: 15%">HtsCode</th>
               <th style="width: 25%">Notes</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let txqoh of txqohs">
-              <td><button class="btn btn-info" (click)="editTxQohsModal(txqoh)">Edit</button></td>
-              <td><button class="btn btn-info" (click)="deleteTxQoh(txqoh.txQohId)">Delete</button></td>
-              <td>{{txqoh.txQohId}}</td> 
-              <td>{{txqoh.pn}}</td>
-              <td>{{txqoh.extremePn}}</td>
-              <td>{{txqoh.partDescription}}</td>
-              <td>{{txqoh.qoh}}</td>
-              <td>{{txqoh.location}}</td>
-              <td>{{txqoh.htsCode}}</td>
-              <td>{{txqoh.notes}}</td>
+            <tr *ngFor="let masterPart of masterParts">
+              <td><button class="btn btn-info" 
+                [routerLink]="['/txqoh-edit/', masterPart.masterPartId]">Edit</button></td>
+              <!--<td><button class="btn btn-info" (click)="editTxQohsModal(masterPart)">Edit</button></td>-->
+              <td><button class="btn btn-info" (click)="deleteMasterPart(masterPart.masterPartId)">Delete</button></td>
+              <td>{{masterPart.masterPartId}}</td> 
+              <td>{{masterPart.partNumber}}</td>
+              <td>{{masterPart.mlsPn}}</td>
+              <td>{{masterPart.partDescription}}</td>
+              <td>{{masterPart.qoh}}</td>
+              <td>{{masterPart.location}}</td>
+              <td>{{masterPart.htsCode}}</td>
+              <td>{{masterPart.notes}}</td>
             </tr>
           </tbody>
         </table>

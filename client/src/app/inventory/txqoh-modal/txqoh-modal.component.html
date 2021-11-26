@@ -1,33 +1,31 @@
 <div class="modal-header">
-    <h4 class="modal-title pull-left">Edit Qoh: {{txqoh?.pn}}</h4>
+    <h4 class="modal-title pull-left">Edit Qoh: {{masterPart?.partNumber}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form #txQohForm="ngForm" id="txQohForm">
+    <form #masterPartForm="ngForm" id="masterPartForm">
         <div class="form-group">
-            <input type="text" class="form-control" required name="pn" [(ngModel)]="txqoh.pn" placeholder="Pn">
+            <input type="text" class="form-control" required name="partNumber" [(ngModel)]="masterPart.partNumber" placeholder="PartNumber">
         </div>
 
         <div class="form-group">
-          <input type="text" class="form-control" name="extremePn" [(ngModel)]="txqoh.extremePn" placeholder="extremePn">
+          <input type="text" class="form-control" name="mlsPn" [(ngModel)]="masterPart.mlsPn" placeholder="mlsPn">
         </div>
     
         <div class="form-group">
-            <input type="text" class="form-control" required name="partDescription" [(ngModel)]="txqoh.partDescription" placeholder="PartDescription">
+            <input type="text" class="form-control" required name="partDescription" [(ngModel)]="masterPart.partDescription" placeholder="PartDescription">
         </div>
             
         <div class="form-group">
-            <input type="text" class="form-control" required name="qoh" [(ngModel)]="txqoh.qoh" placeholder="Qoh">
+            <input type="text" class="form-control" required name="qoh" [(ngModel)]="masterPart.qoh" placeholder="Qoh">
         </div>
     
-        <div class="form-group">
-            <input type="text" class="form-control" required name="location" [(ngModel)]="txqoh.location" placeholder="Location">
-        </div>
+
     
         <div class="form-group">
-            <input type="text" class="form-control" required name="notes" [(ngModel)]="txqoh.notes" placeholder="Notes">
+            <input type="text" class="form-control" required name="notes" [(ngModel)]="masterPart.notes" placeholder="Notes">
         </div>
   
     </form>
@@ -35,5 +33,5 @@
   
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
-    <button type="button" class="btn btn-success" (click)="updateTxQoh()" form="txQohForm">Submit</button>
+    <button type="button" class="btn btn-success" (click)="updateMasterPart()" form="masterPartForm">Submit</button>
   </div>

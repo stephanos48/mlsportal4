@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Migrations
 {
-    public class GeneralRepository
+    public class GeneralRepository : IGeneralRepository
     {
-                private readonly DataContext _context;
+        private readonly DataContext _context;
         private readonly IMapper _mapper;
         public GeneralRepository(DataContext context, IMapper mapper)
         {

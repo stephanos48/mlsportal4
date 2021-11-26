@@ -1,4 +1,4 @@
-import { Component, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { GeneralService } from 'src/app/_services/general.service';
 import { ConfirmService } from '../../_services/confirm.service';
 import { ToastrService } from 'ngx-toastr';
 import { TxqohModalComponent } from '../txqoh-modal/txqoh-modal.component';
-import { TxQoh } from 'src/app/_models/txqoh';
+import { MasterPart } from 'src/app/_models/masterPart';
 
 @Component({
   selector: 'app-txqoh',
@@ -19,13 +19,13 @@ import { TxQoh } from 'src/app/_models/txqoh';
 })
 export class TxqohComponent implements OnInit {
   @Output() cancelCreate = new EventEmitter();
+  //@Input() masterPart: MasterPart;
   baseUrl = environment.apiUrl;
-  txqohs: TxQoh[];
-  txqoh: TxQoh = JSON.parse(localStorage.getItem('txqoh'));
+  masterParts: MasterPart[];
+  masterPart: MasterPart = JSON.parse(localStorage.getItem('masterPart'));
   createForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
   createMode = false;
-  customerParams: any = {};
   pagination: Pagination;
   bsModalRef: BsModalRef;
 
@@ -33,26 +33,26 @@ export class TxqohComponent implements OnInit {
     private route: ActivatedRoute, private modalService: BsModalService, private confirmService: ConfirmService) { }
 
   ngOnInit(): void {
-    this.getTxQohs();
+    this.getMasterParts();
 
     this.bsConfig = {
       containerClass: 'theme-red'
     };
   }
 
-  getTxQohs() {
-    this.generalService.getTxQohs().subscribe((txqohs: TxQoh[]) => {
-      this.txqohs = txqohs;
+  getMasterParts() {
+    this.generalService.getMasterParts().subscribe((masterParts: MasterPart[]) => {
+      this.masterParts = masterParts;
     }, error => {
       console.log(error);
     });
   }
 
-  deleteTxQoh(id: number) {
+  deleteMasterPart(id: number) {
     this.confirmService.confirm('Confirm delete message', 'This cannot be undone').subscribe(result => {
       if (result) {
-        this.generalService.deleteTxQoh(id).subscribe(() => {
-          this.txqohs.splice(this.txqohs.findIndex(m => m.txQohId === id), 1);
+        this.generalService.deleteMasterPart(id).subscribe(() => {
+          this.masterParts.splice(this.masterParts.findIndex(m => m.masterPartId === id), 1);
         })
       }
     })
@@ -60,7 +60,7 @@ export class TxqohComponent implements OnInit {
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.getTxQohs();
+    this.getMasterParts();
   }
 
   createToggle() {
@@ -75,9 +75,15 @@ export class TxqohComponent implements OnInit {
     this.cancelCreate.emit(false);
   }
 
-  editTxQohsModal(txqoh: TxQoh) {
+  formatDate(date: string): string {
+    const parsedDate = new Date(date);
+  const formattedDate = (parsedDate.getMonth() + 1) + '-' + parsedDate.getDate() + '-' + parsedDate.getFullYear();
+    return formattedDate;
+  }
+
+  editTxQohsModal(masterPart: MasterPart) {
     const initialState = {
-      txqoh
+      masterPart
     };
     this.bsModalRef = this.modalService.show(TxqohModalComponent, {initialState});
     this.bsModalRef.content.updateSelectedTxQoh.subscribe(response => {

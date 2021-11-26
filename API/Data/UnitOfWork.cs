@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using API.Data.Migrations;
 using API.Interfaces;
 using AutoMapper;
 
@@ -21,6 +22,7 @@ namespace API.Data
         public ILikesRepository LikesRepository => new LikesRepository(_context);
 
         public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
+        public IGeneralRepository GeneralRepository => new GeneralRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {

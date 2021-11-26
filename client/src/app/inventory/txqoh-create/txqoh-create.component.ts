@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
-import { TxQoh } from 'src/app/_models/txqoh';
+import { MasterPart } from 'src/app/_models/masterPart';
 import { GeneralService } from 'src/app/_services/general.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class TxqohCreateComponent implements OnInit {
   }
 
   create() {
-    this.generalService.createTxQoh(this.model).subscribe(() => {
+    this.generalService.createMasterPart(this.model).subscribe(() => {
       console.log('created successfully');
     }, error => {
       this.Toastr.error(error);
@@ -35,6 +35,7 @@ export class TxqohCreateComponent implements OnInit {
   cancel() {
     this.cancelCreate.emit(false);
     console.log('cancelled');
+    this.router.navigate(['/inventory']);
   }
 
 }

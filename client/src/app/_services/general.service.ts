@@ -1,21 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 //import { PoPlan } from '../_models/poplan';
 //import { Quote } from '../_models/quote';
 //import { QuoteDetail } from '../_models/quotedetail';
 //import { SoPlan } from '../_models/soplan';
 //import { Supplier } from '../_models/supplier';
-import { TxQoh } from '../_models/txqoh';
+import { MasterPart } from '../_models/masterPart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralService {
   baseUrl = environment.apiUrl;
-  formData: TxQoh;
+  formData: MasterPart;
+  masterPart: any;
+  currentMasterPart: MasterPart;
+  private currentMasterPartSource = new ReplaySubject<MasterPart>(1);
+  currentMasterPart$ = this.currentMasterPartSource.asObservable();
+  photoUrl = new BehaviorSubject<string>('../../assets/part.jpg');
+  currentPhotoUrl = this.photoUrl.asObservable();
   //formData1: PoPlan;
   //formData2: SoPlan;
 
@@ -23,10 +29,9 @@ export class GeneralService {
 
   Form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    pn: new FormControl(''),
+    partNumber: new FormControl(''),
     partDescription: new FormControl(''),
     qoh: new FormControl(''),
-    location: new FormControl(''),
     notes: new FormControl('')
   });
 
@@ -34,30 +39,46 @@ export class GeneralService {
     return this.http.get(this.baseUrl + 'responsibles/getResponsibles');
   }*/
 
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'masterPart/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'masterPart/delete-photo/' + photoId);
+  }
+
+  setCurrentMasterPart(masterPart: MasterPart) {
+    //user.roles = [];
+    //const roles = this.getDecodedToken(user.token).role;
+    //Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+    localStorage.setItem('masterPart', JSON.stringify(masterPart));
+    this.currentMasterPartSource.next(masterPart);
+  }
+
   //TxQoh Methods
 
-  getTxQohs() {
-    return this.http.get(this.baseUrl + 'txqoh/getTxQohs');
+  getMasterParts() {
+    return this.http.get(this.baseUrl + 'masterPart/getMasterParts');
   }
 
   getActualQohs() {
-    return this.http.get(this.baseUrl + 'txqoh/getActualQohs');
+    return this.http.get(this.baseUrl + 'masterPart/getActualQohs');
   }
 
-  updateTxQoh(id: number, txqoh: TxQoh) {
-    return this.http.put(this.baseUrl + 'txqoh/' + id, txqoh);
+  updateMasterPart(id: number, masterPart: MasterPart) {
+    return this.http.put(this.baseUrl + 'masterPart/' + id, masterPart);
   }
 
-  createTxQoh(txqoh: TxQoh) {
-    return this.http.post(this.baseUrl + 'txqoh/createTxQoh', txqoh);
+  createMasterPart(masterPart: MasterPart) {
+    return this.http.post(this.baseUrl + 'masterPart/createMasterPart', masterPart);
   }
 
-  getTxQoh(id): Observable<TxQoh> {
-    return this.http.get<TxQoh>(this.baseUrl + 'txqoh/' + id);
+  getMasterPart(id): Observable<MasterPart> {
+    return this.http.get<MasterPart>(this.baseUrl + 'masterPart/' + id);
   }
 
-  deleteTxQoh(id: number) {
-    return this.http.delete(this.baseUrl + 'txqoh/' + id);
+  deleteMasterPart(id: number) {
+    return this.http.delete(this.baseUrl + 'masterPart/' + id);
   }
 
   //Purchase Orders Methods

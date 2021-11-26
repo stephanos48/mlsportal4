@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule  } from '@angular/forms';
+import { SharedModule } from './_modules/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,6 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -40,6 +40,7 @@ import { TxqohCreateComponent } from './inventory/txqoh-create/txqoh-create.comp
 import { TxqohEditComponent } from './inventory/txqoh-edit/txqoh-edit.component';
 import { TxqohModalComponent } from './inventory/txqoh-modal/txqoh-modal.component';
 import { TxqohactualsComponent } from './inventory/txqohactuals/txqohactuals.component';
+import { PartphotoEditComponent } from './inventory/partphoto-edit/partphoto-edit.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { TxqohactualsComponent } from './inventory/txqohactuals/txqohactuals.com
     TxqohCreateComponent,
     TxqohEditComponent,
     TxqohModalComponent,
-    TxqohactualsComponent
+    TxqohactualsComponent,
+    PartphotoEditComponent
   ],
   imports: [
     BrowserModule,
@@ -85,10 +87,13 @@ import { TxqohactualsComponent } from './inventory/txqohactuals/txqohactuals.com
     NgxSpinnerModule,
     ReactiveFormsModule
   ],
+  exports: [
+
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

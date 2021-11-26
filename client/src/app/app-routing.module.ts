@@ -20,6 +20,8 @@ import { TxqohCreateComponent } from './inventory/txqoh-create/txqoh-create.comp
 import { TxqohModalComponent } from './inventory/txqoh-modal/txqoh-modal.component';
 import { TxqohactualsComponent } from './inventory/txqohactuals/txqohactuals.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { TxqohEditComponent } from './inventory/txqoh-edit/txqoh-edit.component';
+import { MasterPartEditResolver } from './_resolvers/masterPart-edit.resolver';
 
 
 const routes: Routes = [
@@ -30,7 +32,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'members', component: MemberListComponent},
-      {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
+      {path: 'members/:username', component: MemberDetailComponent, 
+        resolve: {member: MemberDetailedResolver}},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'lists', component: ListsComponent},
       {path: 'messages', component: MessagesComponent},
@@ -40,7 +43,8 @@ const routes: Routes = [
       {path: 'txqoh', component: TxqohComponent},
       {path: 'txqohactuals', component: TxqohactualsComponent},
       {path: 'txqoh-modal', component: TxqohModalComponent},      
-      {path: 'txqoh-create', component: TxqohCreateComponent}
+      {path: 'txqoh-create', component: TxqohCreateComponent},
+      {path: 'txqoh-edit/:id', component: TxqohEditComponent, resolve: { masterPart: MasterPartEditResolver }}
     ]
   },
   {path: 'errors', component: TestErrorsComponent },

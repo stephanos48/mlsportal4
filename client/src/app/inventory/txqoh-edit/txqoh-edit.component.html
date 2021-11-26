@@ -1,40 +1,72 @@
 <div class="container mt-4">
-    <div class="col-sm-8">
-      <div class="tab-panel">
-        <tabset class="customer-tabset">
-          <tab heading="Edit Customer">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateTxQoh()">
-              <h4>Pn</h4>
-              <textarea name="pn" rows="1" class="form-control"
-              [(ngModel)]="txqoh.pn"></textarea>
-              <h4>Extreme Pn</h4>
-              <textarea name="extremePn" rows="1" class="form-control"
-              [(ngModel)]="txqoh.extremePn"></textarea>
-              <h4>Description</h4>
-              <textarea name="partDescription" rows="1" class="form-control"
-              [(ngModel)]="txqoh.partDescription"></textarea>
-              <h4>Qoh</h4>
-              <textarea name="qoh" rows="1" class="form-control"
-              [(ngModel)]="txqoh.qoh"></textarea>
-              <h4>Location</h4>
-              <textarea name="location" rows="1" class="form-control"
-              [(ngModel)]="txqoh.location"></textarea>
-              <h4>HtsCode</h4>
-              <textarea name="htsCode" rows="1" class="form-control"
-              [(ngModel)]="txqoh.htsCode"></textarea>
-              <h4>Notes</h4>
-              <textarea name="notes" rows="1" class="form-control"
-              [(ngModel)]="txqoh.notes"></textarea>
-            </form>
-          </tab>
-          <tab heading="Mookie">
-            <p></p>
-          </tab>
-        </tabset>
-      </div>
+  <div class="row">
+      <div class="col-4">
+        <div class="card">
+            <img src="{{masterPart.photoUrl || './assets/part.png'}}" alt="" 
+                class="card-img-top img-thumbnail">
+            <div class="card-body">
+                <div>
+                    <strong>Part Number:</strong>
+                    <p>{{masterPart.partNumber}}</p>
+                </div>
+                <div>
+                    <strong>MlsPn:</strong>
+                    <p>{{masterPart.mlsPn}}</p>
+                </div>
+                <div>
+                    <strong>Description:</strong>
+                    <p>{{masterPart.partDescription}}</p>
+                </div>
+                <div>
+                    <strong>Notes:</strong>
+                    <p>{{masterPart.notes}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success btn-block">Save Changes</button>
+            </div>
+        </div>
     </div>
-    <div class="footer">
-      <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+    <div class="col-8">
+      <tabset class="masterPart-tabset" #masterPartTabs>
+        <tab heading="Edit {{masterPart?.partNumber}}">
+          <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMasterPart()">
+            <h4>Pn</h4>
+            <textarea name="partNumber" rows="1" class="form-control"
+            [(ngModel)]="masterPart.partNumber"></textarea>
+            <h4>Mls Pn</h4>
+            <textarea name="mlsPn" rows="1" class="form-control"
+            [(ngModel)]="masterPart.mlsPn"></textarea>
+            <h4>Description</h4>
+            <textarea name="partDescription" rows="1" class="form-control"
+            [(ngModel)]="masterPart.partDescription"></textarea>
+            <h4>Qoh</h4>
+            <textarea name="qoh" rows="1" class="form-control"
+            [(ngModel)]="masterPart.qoh"></textarea>
+            <!--<h4>Location</h4>
+            <textarea name="location" rows="1" class="form-control"
+            [(ngModel)]="masterPart.location"></textarea>-->
+            <h4>HtsCode</h4>
+            <textarea name="htsCode" rows="1" class="form-control"
+            [(ngModel)]="masterPart.htsCode"></textarea>
+            <h4>Notes</h4>
+            <textarea name="notes" rows="1" class="form-control"
+            [(ngModel)]="masterPart.notes"></textarea>
+          </form>
+        </tab>
+        <tab heading='Edit Photos'>
+          <app-partphoto-edit [masterPart]="masterPart"></app-partphoto-edit>
+        </tab>
+        <tab heading='Locations'>
+          
+        </tab>
+        <tab heading='Purchases'>
+          
+        </tab>
+        <tab heading='Sales'>
+          
+        </tab>
+      </tabset>
     </div>
-  </div>
-
+</div>
+</div>

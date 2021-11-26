@@ -8,14 +8,14 @@ namespace API.Interfaces
 {
     public interface IGeneralRepository
     {
-                //General Methods
+                        //General Methods
         void Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
         Task<bool> SaveChangesAsync();
 
         //TxQoh Methods
-        Task<IEnumerable<MasterPart>> GetMPsAsync();
+        Task<IEnumerable<MasterPart>> GetMasterPartAsync();
         Task<MasterPart> GetMasterPart(int id);
         void DeleteMasterPart(MasterPart masterPart);
 

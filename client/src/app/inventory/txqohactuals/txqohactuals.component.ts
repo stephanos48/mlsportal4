@@ -11,7 +11,7 @@ import { TxQohActual } from 'src/app/_models/txqohactual';
 import { GeneralService } from 'src/app/_services/general.service';
 import { ToastrService } from 'ngx-toastr';
 import { TxqohModalComponent } from '../txqoh-modal/txqoh-modal.component';
-import { TxQoh } from 'src/app/_models/txqoh';
+import { MasterPart } from 'src/app/_models/masterPart';
 
 @Component({
   selector: 'app-txqohactuals',
@@ -68,15 +68,14 @@ export class TxqohactualsComponent implements OnInit {
   cancelCreateMode(createMode: boolean) {
     this.createMode = createMode;
   }
-
   
   cancel() {
     this.cancelCreate.emit(false);
   }
 
-  editTxQohsModal(txqoh: TxQoh) {
+  editTxQohsModal(masterPart: MasterPart) {
     const initialState = {
-      txqoh
+      masterPart
     };
     this.bsModalRef = this.modalService.show(TxqohModalComponent, {initialState});
     this.bsModalRef.content.updateSelectedTxQoh.subscribe(response => {

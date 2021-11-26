@@ -1,9 +1,11 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
-import { TxQoh } from 'src/app/_models/txqoh';
+import { MasterPart } from 'src/app/_models/masterPart';
 import { GeneralService } from 'src/app/_services/general.service';
+
 
 @Component({
   selector: 'app-txqoh-edit',
@@ -12,9 +14,10 @@ import { GeneralService } from 'src/app/_services/general.service';
 })
 export class TxqohEditComponent implements OnInit {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
-  txqoh: TxQoh;
-  @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any) {
+  masterPart: MasterPart;
+  photoUrl: string;
+  bsConfig: Partial<BsDatepickerConfig>
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
       $event.returnValue = true;
     }
@@ -24,17 +27,25 @@ export class TxqohEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.txqoh = data['txqoh'];
+      this.masterPart = data['masterPart'];
     });
+    this.bsConfig = {
+      containerClass: 'theme-red'
+    };
+    this.generalService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
-  updateTxQoh() {
-    this.generalService.updateTxQoh(this.txqoh.txQohId, this.txqoh).subscribe(next => {
+  updateMasterPart() {
+    this.generalService.updateMasterPart(this.masterPart.masterPartId, this.masterPart).subscribe(next => {
       this.toastr.success('Update successful');
-      this.editForm.reset(this.txqoh);
+      this.editForm.reset(this.masterPart);
     }, error => {
       this.toastr.error(error);
     });
+  }
+
+  updateMainPhoto(photoUrl) {
+    this.masterPart.photoUrl = photoUrl;
   }
 
 }

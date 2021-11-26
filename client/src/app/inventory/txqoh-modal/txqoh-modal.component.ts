@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { TxQoh } from 'src/app/_models/txqoh';
+import { MasterPart } from 'src/app/_models/masterPart';
 import { GeneralService } from 'src/app/_services/general.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { GeneralService } from 'src/app/_services/general.service';
 })
 export class TxqohModalComponent implements OnInit {
   @Output() updateSelectedTxQoh = new EventEmitter();
-  txqoh: TxQoh;
+  masterPart: MasterPart;
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(public bsModalRef: BsModalRef, private generalService: GeneralService,
@@ -24,11 +24,11 @@ export class TxqohModalComponent implements OnInit {
     };
   }
 
-  updateTxQoh() {
-    this.generalService.updateTxQoh(this.txqoh.txQohId, this.txqoh)
+  updateMasterPart() {
+    this.generalService.updateMasterPart(this.masterPart.masterPartId, this.masterPart)
       .subscribe(response => {
         console.log('Server Response: Update Successful', response);
-        this.updateSelectedTxQoh.emit(this.txqoh);
+        this.updateSelectedTxQoh.emit(this.masterPart);
         this.bsModalRef.hide();
       });
   }

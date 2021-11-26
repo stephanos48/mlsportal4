@@ -35,6 +35,7 @@ namespace API.Data
         public DbSet<ShipMode> ShipModes { get; set; }
         public DbSet<Container> Containers { get; set; }
         public DbSet<ContainerDetail> ContainerDetails { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }      
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
